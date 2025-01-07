@@ -10,12 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.9'
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
@@ -23,11 +24,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run unit tests
-      run: pytest tests
+      run: pytest tests/
       env:
-        PYTHONPATH: ${{ github.workspace }}  # Add this to include the etl module
+        PYTHONPATH: ${{ github.workspace }}  # Set PYTHONPATH to the workspace
 
     - name: Run ETL
       run: python run_etl.py
       env:
-        PYTHONPATH: ${{ github.workspace }}  # Ensure this is set for the script as well
+        PYTHONPATH: ${{ github.workspace }}
