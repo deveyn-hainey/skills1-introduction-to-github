@@ -25,9 +25,9 @@ jobs:
     - name: Run unit tests
       run: pytest tests
       env:
-        PYTHONPATH: ${{ github.workspace }}
+        PYTHONPATH: ${{ github.workspace }}  # Add this to include the etl module
 
     - name: Run ETL
       run: python run_etl.py
       env:
-        PYTHONPATH: ${{ github.workspace }}
+        PYTHONPATH: ${{ github.workspace }}  # Ensure this is set for the script as well
