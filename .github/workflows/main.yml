@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Check out repository
       uses: actions/checkout@v2
 
     - name: Set up Python
@@ -26,9 +26,14 @@ jobs:
     - name: Run unit tests
       run: pytest tests/
       env:
-        PYTHONPATH: ${{ github.workspace }}  # Set PYTHONPATH to the workspace
+        PYTHONPATH: ${{ github.workspace }}
 
     - name: Run ETL
       run: python run_etl.py
       env:
+        REPO_URL: ${{ secrets.REPO_URL }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        LOCAL_PATH: repo
+        DB_URL: sqlite:///etl_data.db
+        TABLE_NAME: etl_table
         PYTHONPATH: ${{ github.workspace }}
