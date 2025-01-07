@@ -9,3 +9,4 @@ def transform_data(file_paths):
     df['line_count'] = df['content'].apply(lambda x: len(x.splitlines()))
     print("Transformation complete")
     return df
+

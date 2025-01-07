@@ -8,3 +8,4 @@ def extract_repo(repo_url, local_path):
         repo = Repo(local_path)
         repo.git.pull()
     print(f"Repository extracted to {local_path}")
+
