@@ -22,8 +22,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: List repository files
+      run: ls -R
+
+    - name: Verify tests directory
+      run: ls tests
+
     - name: Run unit tests
-      run: pytest tests/
+      run: pytest
       env:
         PYTHONPATH: ${{ github.workspace }}
 
@@ -31,4 +37,3 @@ jobs:
       run: python run_etl.py
       env:
         PYTHONPATH: ${{ github.workspace }}
-
