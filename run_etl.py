@@ -1,12 +1,17 @@
+import os
 from etl.extract import extract_repo
 from etl.transform import transform_data
 from etl.load import load_data
 
 def main():
-    repo_url = "https://github.com/example/example-repo.git"
-    local_path = "repo"
-    db_url = "sqlite:///etl_data.db"
-    table_name = "etl_table"
+    # Fetch dynamic values from environment variables
+    repo_url = os.getenv("REPO_URL")  # Repository URL
+    local_path = os.getenv("LOCAL_PATH", "repo")  # Default local path
+    db_url = os.getenv("DB_URL", "sqlite:///etl_data.db")  # Default database URL
+    table_name = os.getenv("TABLE_NAME", "etl_table")  # Default table name
+
+    if not repo_url:
+        raise ValueError("REPO_URL environment variable is required")
 
     # ETL Pipeline
     extract_repo(repo_url, local_path)
@@ -16,4 +21,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
