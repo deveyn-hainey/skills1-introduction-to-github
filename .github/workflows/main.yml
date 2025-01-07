@@ -24,6 +24,11 @@ jobs:
 
     - name: Run unit tests
       run: pytest tests/
+      env:
+        PYTHONPATH: ${{ github.workspace }}
 
     - name: Run ETL
       run: python run_etl.py
+      env:
+        PYTHONPATH: ${{ github.workspace }}
+
